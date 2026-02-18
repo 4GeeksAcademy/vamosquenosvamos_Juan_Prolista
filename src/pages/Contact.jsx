@@ -13,12 +13,25 @@ export const Contact = () => {
   }, [acciones, store.listaContactos.length]);
 
   return (
-    <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h1 className="h3 m-0">Lista de contactos</h1>
-        <Link to="/contacto/nuevo" className="btn btn-success">
-          Agregar contacto
-        </Link>
+    <div className="container">
+      <section className="hero-contactos rounded-4 p-4 p-md-5 mb-4 mb-md-5">
+        <div className="d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+          <div>
+            <p className="text-uppercase small fw-semibold mb-2">Agenda digital</p>
+            <h1 className="display-6 fw-bold mb-2">Lista de contactos</h1>
+            <p className="mb-0 text-secondary">
+              Gestiona tu agenda de forma simple, clara y rápida.
+            </p>
+          </div>
+          <Link to="/contacto/nuevo" className="btn btn-primary btn-lg align-self-start">
+            <i className="fa-solid fa-user-plus me-2" />
+            Agregar contacto
+          </Link>
+        </div>
+      </section>
+
+      <div className="mb-3">
+        <h2 className="h4 mb-0">Tus contactos</h2>
       </div>
 
       {store.cargandoContactos && (
@@ -28,12 +41,16 @@ export const Contact = () => {
       {store.errorContactos && <p className="text-danger">{store.errorContactos}</p>}
 
       {!store.cargandoContactos && store.listaContactos.length === 0 && (
-        <div className="alert alert-light border">No hay contactos todavía.</div>
+        <div className="alert alert-light border rounded-4">
+          No hay contactos todavía.
+        </div>
       )}
 
-      <div className="d-flex flex-column gap-3">
+      <div className="row g-3 g-md-4">
         {store.listaContactos.map((contactoItem) => (
-          <ContactCard key={contactoItem.id} contacto={contactoItem} />
+          <div className="col-12 col-lg-6" key={contactoItem.id}>
+            <ContactCard contacto={contactoItem} />
+          </div>
         ))}
       </div>
     </div>

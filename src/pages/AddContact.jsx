@@ -77,63 +77,80 @@ export const AddContact = () => {
   };
 
   return (
-    <div className="container py-4">
-      <h1 className="h3 mb-3">
-        {esModoEditar ? "Editar contacto" : "Agregar contacto"}
-      </h1>
-
-      <form className="card p-3" onSubmit={alEnviarFormulario}>
-        <label className="form-label">Nombre completo</label>
-        <input
-          className="form-control mb-3"
-          type="text"
-          name="full_name"
-          value={datosFormulario.full_name}
-          onChange={alCambiarInput}
-          required
-        />
-
-        <label className="form-label">Email</label>
-        <input
-          className="form-control mb-3"
-          type="email"
-          name="email"
-          value={datosFormulario.email}
-          onChange={alCambiarInput}
-          required
-        />
-
-        <label className="form-label">Teléfono</label>
-        <input
-          className="form-control mb-3"
-          type="text"
-          name="phone"
-          value={datosFormulario.phone}
-          onChange={alCambiarInput}
-          required
-        />
-
-        <label className="form-label">Dirección</label>
-        <input
-          className="form-control mb-3"
-          type="text"
-          name="address"
-          value={datosFormulario.address}
-          onChange={alCambiarInput}
-          required
-        />
-
-        {errorFormulario && <p className="text-danger mb-3">{errorFormulario}</p>}
-
-        <div className="d-flex gap-2">
-          <button className="btn btn-primary" type="submit" disabled={cargandoFormulario}>
-            {cargandoFormulario ? "Guardando..." : "Guardar"}
-          </button>
-          <Link className="btn btn-outline-secondary" to="/">
-            Volver
-          </Link>
+    <div className="container">
+      <section className="mx-auto" style={{ maxWidth: "760px" }}>
+        <div className="mb-4">
+          <p className="text-uppercase small fw-semibold mb-2">
+            {esModoEditar ? "Actualizar" : "Crear"}
+          </p>
+          <h1 className="display-6 fw-bold mb-0">
+            {esModoEditar ? "Editar contacto" : "Agregar contacto"}
+          </h1>
         </div>
-      </form>
+
+        <form className="card border-0 shadow-sm rounded-4 p-3 p-md-4" onSubmit={alEnviarFormulario}>
+          <div className="row g-3">
+            <div className="col-12">
+              <label className="form-label">Nombre completo</label>
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                name="full_name"
+                value={datosFormulario.full_name}
+                onChange={alCambiarInput}
+                required
+              />
+            </div>
+
+            <div className="col-12 col-md-6">
+              <label className="form-label">Email</label>
+              <input
+                className="form-control form-control-lg"
+                type="email"
+                name="email"
+                value={datosFormulario.email}
+                onChange={alCambiarInput}
+                required
+              />
+            </div>
+
+            <div className="col-12 col-md-6">
+              <label className="form-label">Teléfono</label>
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                name="phone"
+                value={datosFormulario.phone}
+                onChange={alCambiarInput}
+                required
+              />
+            </div>
+
+            <div className="col-12">
+              <label className="form-label">Dirección</label>
+              <input
+                className="form-control form-control-lg"
+                type="text"
+                name="address"
+                value={datosFormulario.address}
+                onChange={alCambiarInput}
+                required
+              />
+            </div>
+          </div>
+
+          {errorFormulario && <p className="text-danger mt-3 mb-0">{errorFormulario}</p>}
+
+          <div className="d-flex flex-column flex-sm-row gap-2 mt-4">
+            <button className="btn btn-primary px-4" type="submit" disabled={cargandoFormulario}>
+              {cargandoFormulario ? "Guardando..." : "Guardar"}
+            </button>
+            <Link className="btn btn-outline-secondary px-4" to="/">
+              Volver
+            </Link>
+          </div>
+        </form>
+      </section>
     </div>
   );
 };

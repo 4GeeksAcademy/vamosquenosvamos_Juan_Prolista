@@ -1,11 +1,13 @@
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Check the <a target="_blank" href="https://4geeks.com/docs/start/start-react-advanced">template documentation</a> <i className="fa-solid fa-file"></i> for help.
-		</p>
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
+	<footer className="footer mt-5 py-4 border-top">
+		<div className="container text-center text-secondary">
+			<p className="mb-1">
+				<i className="fa-regular fa-address-book me-2" />
+				Agenda de contactos con React + Bootstrap
+			</p>
+			<p className="mb-0 small">
+				Hecho con <i className="fa fa-heart text-danger" /> por Juan
+			</p>
+		</div>
 	</footer>
 );
