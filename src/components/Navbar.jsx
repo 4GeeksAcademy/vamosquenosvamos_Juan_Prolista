@@ -11,7 +11,7 @@ export const Navbar = () => {
 					<span>Mis Contactos</span>
 				</Link>
 				<div className="ms-auto">
-					<Link to="/contacto/nuevo" className="btn btn-primary px-3">
+					<Link to="/add" className="btn btn-primary px-3">
 						<i className="fa-solid fa-user-plus me-2" />
 						Nuevo contacto
 					</Link>
