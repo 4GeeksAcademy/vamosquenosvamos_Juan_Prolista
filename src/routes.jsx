@@ -4,15 +4,17 @@ import {
     Route,
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
-import { Contact } from "./pages/Contact";
-import { AddContact } from "./pages/AddContact";
+import ContactList from "./views/ContactList";
+import ContactForm from "./views/ContactForm";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
-        <Route path="/" element={<Contact />} />
-        <Route path="/contacto/nuevo" element={<AddContact />} />
-        <Route path="/contacto/:id" element={<AddContact />} />
+        <Route index element={<ContactList />} />
+        <Route path="/add" element={<ContactForm />} />
+        <Route path="/edit/:id" element={<ContactForm />} />
+        <Route path="/contacto/nuevo" element={<ContactForm />} />
+        <Route path="/contacto/:id" element={<ContactForm />} />
       </Route>
     )
 );

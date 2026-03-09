@@ -1,56 +1,74 @@
-import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { deleteContact } from "../store";
 
-export const ContactCard = ({ contacto }) => {
-  const navegar = useNavigate();
-  const { acciones } = useGlobalReducer();
+export const ContactCard = ({ contact }) => {
+  const { store, dispatch } = useGlobalReducer();
+  const isBusy = store.isLoadingContacts || store.isSavingContact;
 
   const alBorrar = async () => {
     const confirmar = window.confirm("¿Seguro que quieres borrar este contacto?");
     if (!confirmar) return;
-    await acciones.borrarContacto(contacto.id);
+    await deleteContact(dispatch, contact.id);
   };
 
   return (
     <article className="card border-0 shadow-sm rounded-4 p-3 p-md-4 contact-card">
       <div className="d-flex align-items-center gap-3 mb-3">
         <div className="contact-avatar">
-          {String(contacto.full_name || "?")
+          {String(contact.name || "?")
             .trim()
             .charAt(0)
             .toUpperCase()}
         </div>
         <div>
-          <h2 className="h5 mb-1">{contacto.full_name}</h2>
+          <h2 className="h5 mb-1">{contact.name}</h2>
           <p className="text-secondary mb-0 small">Contacto personal</p>
         </div>
       </div>
 
       <p className="mb-2 text-secondary">
-        <i className="fa-solid fa-envelope me-2 text-primary" />
-        {contacto.email}
+        <span className="contact-detail-label">Email:</span>
+        {contact.email}
       </p>
       <p className="mb-2 text-secondary">
-        <i className="fa-solid fa-phone me-2 text-primary" />
-        {contacto.phone}
+        <span className="contact-detail-label">Telefono:</span>
+        {contact.phone}
       </p>
       <p className="mb-4 text-secondary">
-        <i className="fa-solid fa-location-dot me-2 text-primary" />
-        {contacto.address}
+        <span className="contact-detail-label">Direccion:</span>
+        {contact.address}
       </p>
 
       <div className="d-flex gap-2 mt-auto">
-        <button
+        <Link
           className="btn btn-outline-primary btn-sm"
-          type="button"
-          onClick={() => navegar(`/contacto/${contacto.id}`)}
+          to={`/edit/${contact.id}`}
+          aria-label={`Editar ${contact.name}`}
         >
           Editar
-        </button>
-        <button className="btn btn-outline-danger btn-sm" type="button" onClick={alBorrar}>
+        </Link>
+        <button
+          className="btn btn-outline-danger btn-sm"
+          type="button"
+          onClick={alBorrar}
+          disabled={isBusy}
+          aria-label={`Borrar ${contact.name}`}
+        >
           Borrar
         </button>
       </div>
     </article>
   );
+};
+
+ContactCard.propTypes = {
+  contact: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  }).isRequired,
 };
